@@ -35,18 +35,27 @@
         android:layout_marginTop="100dp"
         android:layout_marginLeft="70dp"
         ></EditText>
-<Button
-    android:id="@+id/btnCalcular"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="200dp"
-    android:text="Calcular"></Button>
+
+    <Button
+        android:id="@+id/btnCalcular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="260dp"
+        android:text="Calcular"></Button>
 
     <TextView
         android:id="@+id/lblRespuesta"
-        android:text="Respuesta: ?"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="280dp"
-        android:layout_marginLeft="60dp"></TextView>
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="350dp"
+        android:text="Respuesta: ?"></TextView>
+
+    <Spinner
+        android:id="@+id/spnOpciones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="200dp"
+        android:entries="@array/opciones_calculadora" />
 </RelativeLayout>
