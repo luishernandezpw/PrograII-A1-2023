@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">Conversores</string>
-
+    <string-array name="monedas">
+        <item>Dolar</item>
+        <item>Quetzal</item>
+        <item>Lempira</item>
+        <item>Cordoba</item>
+        <item>Peso CR</item>
+        <item>Colon SV</item>
+        <item>Euro</item>
+        <item>Yenes</item>
+        <item>Rupias</item>
+    </string-array>
 </resources>
