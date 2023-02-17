@@ -11,4 +11,22 @@
         <item>Yenes</item>
         <item>Rupias</item>
     </string-array>
+    <string-array name="longitud">
+        <item>Metros</item>
+        <item>Centimetros</item>
+        <item>Pies</item>
+        <item>Pulgadas</item>
+        <item>Varas</item>
+        <item>Yardas</item>
+        <item>Kilometros</item>
+        <item>Millas</item>
+    </string-array>
+    <string-array name="masa">
+        <item>Libras</item>
+        <item>Miligramos</item>
+        <item>Gramos</item>
+        <item>Onzas</item>
+        <item>Kilogramos</item>
+        <item>Tonelada</item>
+    </string-array>
 </resources>
