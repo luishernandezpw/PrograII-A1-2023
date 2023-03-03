@@ -7,27 +7,6 @@
     tools:context=".MainActivity"
     android:layout_margin="20dp">
 
-    <EditText
-        android:id="@+id/txtCantidad"
-        android:layout_marginTop="220dp"
-        android:hint="Cantidad a convertir"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></EditText>
-
-    <Button
-        android:id="@+id/btnConvertir"
-        android:layout_marginTop="280dp"
-        android:text="Convertir"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></Button>
-
-    <TextView
-        android:id="@+id/lblRespuesta"
-        android:layout_marginTop="350dp"
-        android:text="Respuesta: ?"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></TextView>
-
     <TabHost
         android:id="@+id/tbhConversores"
         android:layout_width="match_parent"
@@ -85,75 +64,34 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/tbMonedas"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/lblDeMonedas"
-                        android:text="DE:"
-                        android:layout_marginTop="40dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"></TextView>
-                    <Spinner
-                        android:id="@+id/spnDeMonedas"
-                        android:layout_marginTop="40dp"
-                        android:layout_marginLeft="40dp"
-                        android:entries="@array/monedas"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"></Spinner>
-
-                    <TextView
-                        android:id="@+id/lblAmonedas"
-                        android:text="A:"
-                        android:layout_marginTop="120dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"></TextView>
-
-                    <Spinner
-                        android:id="@+id/spnAMonedas"
-                        android:layout_marginTop="120dp"
-                        android:layout_marginLeft="40dp"
-                        android:entries="@array/monedas"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"></Spinner>
-
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/tbMasa"
+                    android:id="@+id/tbCajero"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/lblDeMasa"
-                        android:text="DE:"
-                        android:layout_marginTop="40dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"></TextView>
-                    <Spinner
-                        android:id="@+id/spnDeMasa"
-                        android:layout_marginTop="40dp"
-                        android:layout_marginLeft="40dp"
-                        android:entries="@array/masa"
+                    <EditText
+                        android:id="@+id/txtCantidadCajero"
+                        android:hint="Cantidad a retirar: "
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"></Spinner>
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="40dp"
+                        android:layout_marginLeft="20dp"/>
+
+                    <Button
+                        android:id="@+id/btnRetirar"
+                        android:text="Retirar: "
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="80dp"
+                        android:layout_marginLeft="20dp"/>
 
                     <TextView
-                        android:id="@+id/lblAMasa"
-                        android:text="A:"
-                        android:layout_marginTop="120dp"
+                        android:id="@+id/lblRespuestaCajero"
+                        android:text="Respuesta: "
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"></TextView>
-
-                    <Spinner
-                        android:id="@+id/spnAMasa"
-                        android:layout_marginTop="120dp"
-                        android:layout_marginLeft="40dp"
-                        android:entries="@array/masa"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"></Spinner>
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="160dp"
+                        android:layout_marginLeft="20dp"/>
                 </RelativeLayout>
             </FrameLayout>
         </LinearLayout>

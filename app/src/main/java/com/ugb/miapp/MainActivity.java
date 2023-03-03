@@ -23,26 +23,40 @@ public class MainActivity extends AppCompatActivity {
         tbh = findViewById(R.id.tbhConversores);
         tbh.setup();
 
-        tbh.addTab(tbh.newTabSpec("longitud").setContent(R.id.tbLongitud).setIndicator("", getDrawable(R.drawable.longitud)));
-        tbh.addTab(tbh.newTabSpec("monedas").setContent(R.id.tbMonedas).setIndicator("", getDrawable(R.drawable.money)));
-        tbh.addTab(tbh.newTabSpec("masa").setContent(R.id.tbMasa).setIndicator("", getDrawable(R.drawable.masa)));
+        tbh.addTab(tbh.newTabSpec("AREA").setContent(R.id.tbLongitud).setIndicator("AREA"));
+        tbh.addTab(tbh.newTabSpec("CAJERO").setContent(R.id.tbCajero).setIndicator("CAJERO"));
 
-        btn=findViewById(R.id.btnConvertir);
+        btn=findViewById(R.id.btnRetirar);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                spn = findViewById(R.id.spnDeMonedas);
-                int de = spn.getSelectedItemPosition();
+                try {
+                    temp = findViewById(R.id.txtCantidadCajero);
+                    double cantidad = Double.parseDouble(temp.getText().toString());
 
-                spn = findViewById(R.id.spnAMonedas);
-                int a = spn.getSelectedItemPosition();
-
-                temp = (TextView) findViewById(R.id.txtCantidad);
-                double cantidad = Double.parseDouble(temp.getText().toString());
-
-                double respuesta = miConversor.convertir(0, de, a, cantidad);
-                temp = findViewById(R.id.lblRespuesta);
-                temp.setText("Respuesta: "+ respuesta);
+                    double j = 0;
+                    double denominaciones[] = {100, 50, 20, 10, 5, 1, 0.5, 0.25, 0.1, 0.05, 0.01};
+                    String resp = "";
+                    for (int i = 0; i < denominaciones.length; i++) {
+                        while (cantidad/100*100 >= denominaciones[i]) {
+                            cantidad = cantidad/100*100 - denominaciones[i];
+                            j++;
+                        }
+                        if (j > 0) {
+                            if (denominaciones[i] > 1) {
+                                resp += j + " billetes de " + denominaciones[i] + "\n";
+                            } else {
+                                resp += j + " monedas de " + denominaciones[i] + "\n";
+                            }
+                        }
+                        j = 0;
+                    }
+                    temp = findViewById(R.id.lblRespuestaCajero);
+                    temp.setText(resp);
+                }catch (Exception e){
+                    temp = findViewById(R.id.lblRespuestaCajero);
+                    temp.setText("Error: "+ e.getMessage());
+                }
             }
         });
     }
