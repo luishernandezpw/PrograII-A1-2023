@@ -2,59 +2,100 @@ package com.ugb.miapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
-    TextView temp;
+    DB db_agenda;
+    String accion="nuevo";
+    String id="";
     Button btn;
-    Spinner spn;
+    TextView temp;
+    FloatingActionButton fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btn = (Button) findViewById(R.id.btnCalcular);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                temp = (EditText)findViewById(R.id.txtNum1);
-                double num1, num2, resp;
-                num1 = Double.parseDouble(temp.getText().toString());
-
-                temp = (EditText)findViewById(R.id.txtNum2);
-                num2 = Double.parseDouble(temp.getText().toString());
-
-                spn = (Spinner) findViewById(R.id.spnOpciones);
-                String msg = "";
-                switch (spn.getSelectedItemPosition()){
-                    case 0://suma
-                        resp = num1 + num2;
-                        msg = "La suma es: "+ resp;
-                        break;
-                    case 1://REsta
-                        resp = num1 - num2;
-                        msg = "La resta es: "+ resp;
-                        break;
-                    case 2://Multi
-                        resp = num1*num2;
-                        msg="La Multiplicacion es: "+ resp;
-                        break;
-                    case 3://division
-                        resp = num1/num2;
-                        msg = "La division es: "+ resp;
-                        break;
-                    case 4://exponente
-                        resp = Math.pow(num1, num2);
-                        msg = "La exponenciacion es: "+ resp;
-                        break;
+        try {
+            btn = findViewById(R.id.btnGuardar);
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    guardar_agenda();
                 }
-                temp = (TextView) findViewById(R.id.lblRespuesta);
-                temp.setText(msg);
+            });
+            fab = findViewById(R.id.fabRegresarListaAmigos);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    regresarListaAmigos();
+                }
+            });
+        }catch (Exception e){
+            Toast.makeText(this, "Error al cargar: "+ e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+        mostrar_datos_amigos();
+    }
+    void mostrar_datos_amigos(){
+        try {
+            Bundle parametros = getIntent().getExtras();
+            accion = parametros.getString("accion");
+            if (accion.equals("modificar")) {
+                String amigos[] = parametros.getStringArray("amigos");
+                id = amigos[0];
+
+                temp = findViewById(R.id.txtnombre);
+                temp.setText(amigos[1]);
+
+                temp = findViewById(R.id.txtdireccion);
+                temp.setText(amigos[2]);
+
+                temp = findViewById(R.id.txtTelefono);
+                temp.setText(amigos[3]);
+
+                temp = findViewById(R.id.txtemail);
+                temp.setText(amigos[4]);
             }
-        });
+        }catch (Exception e){
+            Toast.makeText(this, "Error al mostrar datos: "+ e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+    void guardar_agenda(){
+        try {
+            temp = (TextView) findViewById(R.id.txtnombre);
+            String nombre = temp.getText().toString();
+
+            temp = (TextView) findViewById(R.id.txtdireccion);
+            String direccion = temp.getText().toString();
+
+            temp = (TextView) findViewById(R.id.txtTelefono);
+            String telefono = temp.getText().toString();
+
+            temp = (TextView) findViewById(R.id.txtemail);
+            String email = temp.getText().toString();
+
+            db_agenda = new DB(MainActivity.this, "",null,1);
+            String result = db_agenda.administrar_agenda(id, nombre, direccion, telefono, email, accion);
+            String msg = result;
+            if( result.equals("ok") ){
+                msg = "Registro guardado con exito";
+                regresarListaAmigos();
+            }
+            Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+        }catch (Exception e){
+            Toast.makeText(this, "Error en guardar agenda: "+ e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+    void regresarListaAmigos(){
+        Intent iListaAmigos = new Intent(MainActivity.this, lista_amigos.class);
+        startActivity(iListaAmigos);
     }
 }
