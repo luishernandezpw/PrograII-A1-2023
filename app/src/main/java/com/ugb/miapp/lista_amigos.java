@@ -1,8 +1,10 @@
 package com.ugb.miapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -78,6 +80,9 @@ public class lista_amigos extends AppCompatActivity {
                     parametros.putStringArray("amigos", amigos);
                     abrirAgregarAmigos(parametros);
                     return true;
+                case R.id.mnxEliminar:
+                    eliminarAmigos();
+                    return true;
                 default:
                     return super.onContextItemSelected(item);
             }
@@ -85,8 +90,30 @@ public class lista_amigos extends AppCompatActivity {
             return super.onContextItemSelected(item);
         }
     }
+    void eliminarAmigos(){
+        AlertDialog.Builder confirmacion =  new AlertDialog.Builder(lista_amigos.this);
+        confirmacion.setTitle("Esta seguro de eliminar a?: ");
+        confirmacion.setMessage(cAMigos.getString(1)); //nombre
+        confirmacion.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                db_agenda.administrar_agenda(cAMigos.getString(0), "", "", "","",
+                        "eliminar");
+                obtenerDatosAmigos();
+                dialogInterface.dismiss();//cerrar la cuadro de dialogo
+            }
+        });
+        confirmacion.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        confirmacion.create().show();
+    }
     public void obtenerDatosAmigos(){
         try {
+            alAmigos.clear();
             db_agenda = new DB(lista_amigos.this, "", null, 1);
             cAMigos = db_agenda.consultar_agenda();
             if(cAMigos.moveToFirst()){
