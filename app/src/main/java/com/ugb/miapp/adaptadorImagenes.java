@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class adaptadorImagenes extends BaseAdapter {
+public class adaptadorImagenes extends BaseAdapter{
     Context context;
     ArrayList<amigos> datosAmigosArrayList;
     amigos misAmigos;
@@ -31,16 +31,19 @@ public class adaptadorImagenes extends BaseAdapter {
     public Object getItem(int i) {
         return datosAmigosArrayList.get(i);
     }
+
     @Override
     public long getItemId(int i) {
-        return Long.parseLong(datosAmigosArrayList.get(i).getIdAmigo());
+        return 0;
     }
+
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View itemView = layoutInflater.inflate(R.layout.listview_imagenes, viewGroup, false);
-        try{
+        try {
             misAmigos = datosAmigosArrayList.get(i);
+
             TextView tempVal = itemView.findViewById(R.id.lblTitulo);
             tempVal.setText(misAmigos.getNombre());
 
@@ -51,11 +54,10 @@ public class adaptadorImagenes extends BaseAdapter {
             tempVal.setText(misAmigos.getEmail());
 
             ImageView imgView = itemView.findViewById(R.id.imgFoto);
-            Bitmap bitmap = BitmapFactory.decodeFile(misAmigos.getUrlFoto());
-
+            Bitmap bitmap = BitmapFactory.decodeFile(misAmigos.getUrlImg());
             imgView.setImageBitmap(bitmap);
         }catch (Exception ex){
-            Toast.makeText(context, "Error al mostrar la imagen: "+ ex.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Error al mostrar la foto en el ListView: "+ ex.getMessage(), Toast.LENGTH_LONG).show();
         }
         return itemView;
     }
