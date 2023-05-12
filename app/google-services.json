@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "705347867485",
+    "firebase_url": "https://practica-ugb-cru-a1-luis-2023-default-rtdb.firebaseio.com",
+    "project_id": "practica-ugb-cru-a1-luis-2023",
+    "storage_bucket": "practica-ugb-cru-a1-luis-2023.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:705347867485:android:60ebd5e204c504bfafceb4",
+        "android_client_info": {
+          "package_name": "com.ugb.miapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "705347867485-u9rqrn9h4mknci0lc5ibq1qm6ogu3ft7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAy2nY3YEhElE7he53IE6uXQFay7KV3ZdA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "705347867485-u9rqrn9h4mknci0lc5ibq1qm6ogu3ft7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
