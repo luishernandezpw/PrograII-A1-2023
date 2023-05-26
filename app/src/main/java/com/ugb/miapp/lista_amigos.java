@@ -24,6 +24,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +47,7 @@ public class lista_amigos extends AppCompatActivity {
     obtenerDatosServidor datosServidor;
     int posicion = 0;
     detectarInternet di;
+    String miToken = "";
     protected void onCreate(Bundle instance){
         super.onCreate(instance);
         setContentView(R.layout.lista_amigos);
@@ -61,17 +63,27 @@ public class lista_amigos extends AppCompatActivity {
 
         try {
             di = new detectarInternet(getApplicationContext());
-            if (di.hayConexionInternet()) {
+            /*if (di.hayConexionInternet()) {
                 obtenerDatosAmigosServer();
                 sincronizar();
-            } else {
+            } else {*/
                 obtenerDatosAmigos();//offline
-            }
+            //}
             buscarAmigos();
+            obtenerToken();
         }catch (Exception e){
             Log.d("OBTENERBD: ", "DATA: "+ e.getMessage());
             Toast.makeText(this, "Error al ontener datos de las bases de datos... "+ e.getMessage(), Toast.LENGTH_LONG).show();
         }
+    }
+    void obtenerToken(){
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+            if( !task.isSuccessful() ){
+                return;
+            }
+            miToken = task.getResult();
+            Toast.makeText(getApplicationContext(), "mi Token: "+ miToken, Toast.LENGTH_LONG).show();
+        });
     }
     private void sincronizar(){
         cAMigos = db_agenda.pendienteSincronizar();
